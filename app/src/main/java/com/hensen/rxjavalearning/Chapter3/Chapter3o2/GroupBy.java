@@ -1,6 +1,7 @@
 package com.hensen.rxjavalearning.Chapter3.Chapter3o2;
 
 import io.reactivex.Observable;
+import io.reactivex.Observer;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.observables.GroupedObservable;
@@ -49,8 +50,8 @@ public class GroupBy {
                 .subscribe(new Consumer<GroupedObservable<Character, Boolean>>() {
                     @Override
                     public void accept(final GroupedObservable<Character, Boolean> characterCharacterGroupedObservable) throws Exception {
-                        //直接订阅输出key和value
-                        characterCharacterGroupedObservable.subscribe(new Consumer<Boolean>() {
+                        //排序后，直接订阅输出key和value
+                        characterCharacterGroupedObservable.sorted().subscribe(new Consumer<Boolean>() {
                             @Override
                             public void accept(Boolean b) throws Exception {
                                 System.out.println("onNext= group:" + characterCharacterGroupedObservable.getKey() + " value is startWith c Language:" + b);

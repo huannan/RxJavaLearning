@@ -35,5 +35,11 @@ public class CombineLatest {
                 System.out.println("onNext=" + s);
             }
         });
+
+        try {
+            Thread.currentThread().join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }

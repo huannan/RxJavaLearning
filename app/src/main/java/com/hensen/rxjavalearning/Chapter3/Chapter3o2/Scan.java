@@ -15,15 +15,14 @@ public class Scan {
             @Override
             public Integer apply(Integer integer, Integer integer2) throws Exception {
                 return integer < integer2 ? integer : integer2;
+                // return integer + integer2;
             }
         })
                 .subscribe(new Consumer<Integer>() {
                     @Override
                     public void accept(Integer item) throws Exception {
-                        System.out.println("onNext=" + item);
+                        // System.out.println("onNext=" + item);
                     }
                 });
-
-
     }
 }

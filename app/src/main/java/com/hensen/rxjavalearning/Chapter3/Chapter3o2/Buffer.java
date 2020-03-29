@@ -21,7 +21,7 @@ public class Buffer {
         });
 
         Observable.just(1, 2, 3, 4, 5, 6, 7, 8, 9)
-                .buffer(5, 1).subscribe(new Consumer<List<Integer>>() {
+                .buffer(2,1).subscribe(new Consumer<List<Integer>>() {
             @Override
             public void accept(List<Integer> integers) throws Exception {
                 System.out.println("onNext=" + integers.toString());

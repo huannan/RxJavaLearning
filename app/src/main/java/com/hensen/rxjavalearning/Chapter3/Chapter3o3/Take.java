@@ -10,6 +10,7 @@ import io.reactivex.functions.Consumer;
 public class Take {
 
     public static void main(String[] args) {
+        // 实战中经常用来取出一定数量的操作符
         Observable.just(1, 2, 3, 4, 5, 6, 7, 8)
                 .take(3)
                 .subscribe(new Consumer<Integer>() {

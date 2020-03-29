@@ -20,5 +20,11 @@ public class Sample {
                         System.out.println("onNext=" + aLong);
                     }
                 });
+
+        try {
+            Thread.currentThread().join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }

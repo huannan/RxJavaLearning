@@ -2,9 +2,8 @@ package com.hensen.rxjavalearning;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-
+import androidx.appcompat.app.AppCompatActivity;
 import com.hensen.rxjavalearning.Chapter3.Chapter3o1.Interval;
 import com.hensen.rxjavalearning.Chapter3.Chapter3o1.Timer;
 import com.hensen.rxjavalearning.Chapter3.Chapter3o2.FlatMap;
@@ -31,7 +30,6 @@ import com.hensen.rxjavalearning.Chapter6.Chapter6o2.RxUtils;
 import com.hensen.rxjavalearning.Chapter6.Chapter6o3.Vip;
 import com.hensen.rxjavalearning.Chapter8.Subject;
 import com.hensen.rxjavalearning.Chapter9.Chapter9o1o2o3.Main2Activity;
-
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;

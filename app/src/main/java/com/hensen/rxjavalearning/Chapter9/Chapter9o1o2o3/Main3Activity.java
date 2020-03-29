@@ -1,8 +1,7 @@
 package com.hensen.rxjavalearning.Chapter9.Chapter9o1o2o3;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-
+import androidx.appcompat.app.AppCompatActivity;
 import com.hensen.rxjavalearning.R;
 
 public class Main3Activity extends AppCompatActivity {
