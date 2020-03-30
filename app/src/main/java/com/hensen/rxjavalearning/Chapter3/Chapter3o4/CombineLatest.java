@@ -16,18 +16,17 @@ public class CombineLatest {
     public static String[] str = {"A", "B", "C", "D", "E"};
 
     public static void main(String[] args) {
-        Observable<String> just1 = Observable.interval(1, TimeUnit.SECONDS).map(new Function<Long, String>() {
+        Observable<Integer> just1 = Observable.just(1, 2, 3);
+        Observable<String> just2 = Observable.intervalRange(0, 5, 0, 1, TimeUnit.SECONDS).map(new Function<Long, String>() {
             @Override
-            public String apply(Long aLong) throws Exception {
-                return str[(int) (aLong % 5)];
+            public String apply(Long index) throws Exception {
+                return str[index.intValue()];
             }
         });
-        Observable<Long> just2 = Observable.interval(1, TimeUnit.SECONDS);
-
-        Observable.combineLatest(just1, just2, new BiFunction<String, Long, String>() {
+        Observable.combineLatest(just1, just2, new BiFunction<Integer, String, String>() {
             @Override
-            public String apply(String s, Long l) throws Exception {
-                return s + l;
+            public String apply(Integer integer, String s) throws Exception {
+                return integer + " " + s;
             }
         }).subscribe(new Consumer<String>() {
             @Override

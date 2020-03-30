@@ -13,7 +13,7 @@ import io.reactivex.functions.Consumer;
 public class Deley {
 
     public static void main(String[] args) {
-        Disposable subscribe = Observable.just(1, 2, 3, 4, 5).delay(100, TimeUnit.SECONDS)
+        Disposable subscribe = Observable.just(1, 2, 3, 4, 5).delay(2, TimeUnit.SECONDS)
                 .subscribe(new Consumer<Integer>() {
                     @Override
                     public void accept(Integer integer) throws Exception {
@@ -21,6 +21,12 @@ public class Deley {
                     }
                 });
 
-        subscribe.dispose();
+        // subscribe.dispose();
+
+        try {
+            Thread.currentThread().join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }

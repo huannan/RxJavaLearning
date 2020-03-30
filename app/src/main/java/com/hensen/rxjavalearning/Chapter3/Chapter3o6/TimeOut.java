@@ -24,5 +24,11 @@ public class TimeOut {
                         System.out.println("onError");
                     }
                 });
+
+        try {
+            Thread.currentThread().join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -20,9 +20,9 @@ public class OnExceptionResumeNext {
             @Override
             public void subscribe(@NonNull ObservableEmitter<Integer> e) throws Exception {
                 for (int i = 1; i < 5; i++) {
-                    if(i == 4){
-                        e.onError(new Exception("onException crash"));
-                        //e.onError(new Error("onError crash"));
+                    if (i == 4) {
+                        // e.onError(new Exception("onException crash"));
+                        e.onError(new Error("onError crash"));
                     }
                     e.onNext(i);
                 }

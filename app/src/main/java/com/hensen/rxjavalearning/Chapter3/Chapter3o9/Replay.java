@@ -13,15 +13,23 @@ import io.reactivex.observables.ConnectableObservable;
 public class Replay {
 
     public static void main(String[] args) {
-        ConnectableObservable<Long> connectableObservable = Observable.interval(1, TimeUnit.SECONDS).replay();
+        ConnectableObservable<Long> connectableObservable = Observable.interval(1, TimeUnit.SECONDS)
+                //.replay(3);
+                .publish();
         connectableObservable.connect();
 
-        connectableObservable.delaySubscription(3, TimeUnit.SECONDS)
+        connectableObservable.delaySubscription(5, TimeUnit.SECONDS)
                 .subscribe(new Consumer<Long>() {
                     @Override
                     public void accept(Long aLong) throws Exception {
                         System.out.println("onNext=" + aLong);
                     }
                 });
+
+        try {
+            Thread.currentThread().join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }

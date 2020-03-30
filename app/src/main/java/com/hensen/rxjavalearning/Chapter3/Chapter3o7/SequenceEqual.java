@@ -11,7 +11,7 @@ public class SequenceEqual {
 
     public static void main(String[] args) {
         Observable<Integer> just1 = Observable.just(1, 2, 3);
-        Observable<Integer> just2 = Observable.just(1, 2, 3);
+        Observable<Integer> just2 = Observable.just(1, 2, 8);
 
         Observable.sequenceEqual(just1, just2)
                 .subscribe(new Consumer<Boolean>() {

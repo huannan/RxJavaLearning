@@ -27,5 +27,11 @@ public class Amb {
                         System.out.println("onNext=" + integer);
                     }
                 });
+
+        try {
+            Thread.currentThread().join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }

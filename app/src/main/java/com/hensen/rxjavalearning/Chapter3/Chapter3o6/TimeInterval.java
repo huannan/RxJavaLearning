@@ -20,5 +20,11 @@ public class TimeInterval {
                         System.out.println("onNext=" + longTimed.value() + " timeInterval=" + longTimed.time());
                     }
                 });
+
+        try {
+            Thread.currentThread().join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }
