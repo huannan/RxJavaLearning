@@ -11,6 +11,7 @@ import io.reactivex.CompletableOnSubscribe;
 import io.reactivex.Flowable;
 import io.reactivex.FlowableEmitter;
 import io.reactivex.FlowableOnSubscribe;
+import io.reactivex.FlowableSubscriber;
 import io.reactivex.Maybe;
 import io.reactivex.MaybeEmitter;
 import io.reactivex.MaybeObserver;
@@ -19,10 +20,12 @@ import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.Observer;
+import io.reactivex.Scheduler;
 import io.reactivex.Single;
 import io.reactivex.SingleEmitter;
 import io.reactivex.SingleObserver;
 import io.reactivex.SingleOnSubscribe;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
@@ -33,9 +36,18 @@ import io.reactivex.schedulers.Schedulers;
 
 public class Main {
 
-
     public static void main(String[] args) {
-        maybe();
+        // observable();
+        // flowable();
+        // single();
+        // completable();
+        // maybe();
+
+        try {
+            Thread.currentThread().join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void observable() {
@@ -90,7 +102,7 @@ public class Main {
                 e.onNext("但还是要保持微笑");
                 e.onComplete();
             }
-        }, BackpressureStrategy.DROP)
+        }, BackpressureStrategy.DROP)   // 指定背压策略
                 //将被观察者切换到子线程
                 .subscribeOn(Schedulers.io())
                 //将观察者切换到主线程  需要在Android环境下运行
@@ -99,6 +111,7 @@ public class Main {
                 .subscribe(new Subscriber<String>() {
                     @Override
                     public void onSubscribe(Subscription s) {
+                        // 请求发射两条数据
                         s.request(2);
                     }
 
@@ -171,8 +184,8 @@ public class Main {
 
                     @Override
                     public void onComplete() {
+                        // 只能收到完成信号，不能收到数据
                         System.out.println("onComplete");
-
                     }
 
                     @Override
