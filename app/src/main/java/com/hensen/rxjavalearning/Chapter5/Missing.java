@@ -19,17 +19,17 @@ import io.reactivex.schedulers.Schedulers;
 
 public class Missing {
 
-    public static void missing(View view) {
+    public static void main(String[] args) {
         Flowable.create(new FlowableOnSubscribe<Integer>() {
             @Override
             public void subscribe(FlowableEmitter<Integer> emitter) throws Exception {
-                for (int i = 0; i < 129; i++) {
+                for (int i = 0; i < 1000; i++) {
                     emitter.onNext(i);
                 }
             }
-        }, BackpressureStrategy.MISSING)
+        }, BackpressureStrategy.LATEST)
                 .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .observeOn(Schedulers.newThread())
                 .subscribe(new FlowableSubscriber<Integer>() {
                     @Override
                     public void onSubscribe(Subscription s) {
@@ -39,22 +39,28 @@ public class Missing {
                     @Override
                     public void onNext(Integer integer) {
                         try {
-                            Thread.sleep(1000);
+                            Thread.sleep(1);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
-                        Log.e("TAG", "onNext=" + integer);
+                        System.out.println("onNext=" + integer);
                     }
 
                     @Override
                     public void onError(Throwable t) {
-                        t.printStackTrace();
+                        System.out.println("onError=" + t.getMessage());
                     }
 
                     @Override
                     public void onComplete() {
-
+                        System.out.println("onComplete");
                     }
                 });
+
+        try {
+            Thread.currentThread().join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }

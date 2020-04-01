@@ -1,5 +1,6 @@
 package com.hensen.rxjavalearning.Chapter7.Chapter7o1;
 
+import io.reactivex.functions.Consumer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,6 +51,16 @@ public class Main {
                     @Override
                     public void onComplete() {
                         System.out.println("onComplete");
+                    }
+                });
+
+
+        Observable.just("1")
+                .lift(new StringToInteger())
+                .subscribe(new Consumer<Integer>() {
+                    @Override
+                    public void accept(Integer integer) throws Exception {
+                        System.out.println("onNext=" + integer);
                     }
                 });
     }

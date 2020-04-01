@@ -145,25 +145,25 @@ public class MainActivity extends AppCompatActivity {
     //* 5章：背压策略
     //*
     //***************************************
-    public void missing(View view) {
-        Missing.missing(view);
-    }
-
-    public void error(View view) {
-        Error.error(view);
-    }
-
-    public void buffer(View view) {
-        Buffer.buffer(view);
-    }
-
-    public void drop(View view) {
-        Drop.drop(view);
-    }
-
-    public void latest(View view) {
-        Latest.latest(view);
-    }
+//    public void missing(View view) {
+//        Missing.missing(view);
+//    }
+//
+//    public void error(View view) {
+//        Error.error(view);
+//    }
+//
+//    public void buffer(View view) {
+//        Buffer.buffer(view);
+//    }
+//
+//    public void drop(View view) {
+//        Drop.drop(view);
+//    }
+//
+//    public void latest(View view) {
+//        Latest.latest(view);
+//    }
 
     //***************************************
     //*
