@@ -1,8 +1,5 @@
 package com.hensen.rxjavalearning.Chapter5;
 
-import android.util.Log;
-import android.view.View;
-
 import org.reactivestreams.Subscription;
 
 import io.reactivex.BackpressureStrategy;
@@ -10,7 +7,6 @@ import io.reactivex.Flowable;
 import io.reactivex.FlowableEmitter;
 import io.reactivex.FlowableOnSubscribe;
 import io.reactivex.FlowableSubscriber;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -27,7 +23,7 @@ public class Missing {
                     emitter.onNext(i);
                 }
             }
-        }, BackpressureStrategy.LATEST)
+        }, BackpressureStrategy.MISSING)
                 .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.newThread())
                 .subscribe(new FlowableSubscriber<Integer>() {

@@ -48,52 +48,83 @@ public class Subject {
         }
     }
 
+    public static void main(String[] args) {
+        // publishSubject(null);
+        // behaviorSubject(null);
+        // replaySubject(null);
+        asyncSubject(null);
 
-    public static void publishSubject() {
-        PublishSubject publishSubject = PublishSubject.create();
+        try {
+            Thread.currentThread().join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * PublishSubject不会改变事件的发送顺序。如果在已经发送了一部分事件之后注册的observer，是不会收到之前发送的事件
+     *
+     * @param view
+     */
+    public static void publishSubject(View view) {
+        PublishSubject<String> publishSubject = PublishSubject.create();
         publishSubject.subscribe(new SubjectObserver<>("first"));
         publishSubject.onNext("1");
         publishSubject.onNext("2");
-        publishSubject.subscribe(new SubjectObserver<>("seconde"));
+        publishSubject.subscribe(new SubjectObserver<>("second"));
         publishSubject.onNext("3");
         publishSubject.onComplete();
     }
 
-
+    /**
+     * BehaviorSubject会创建出带有默认值的事件流。当BehaviorSubject第一次被observer注册时，如果observable中没有发射数据项的时候，就会将默认值发给observer；如果observable中有发射过数据项的时候，就会将最近发射的数据项发给observer
+     *
+     * @param view
+     */
     public static void behaviorSubject(View view) {
         BehaviorSubject<String> behaviorSubject = BehaviorSubject.createDefault("默认值");
         behaviorSubject.subscribe(new SubjectObserver<String>("first"));
         behaviorSubject.onNext("1");
         behaviorSubject.onNext("2");
-        behaviorSubject.subscribe(new SubjectObserver<String>("seconde"));
+        behaviorSubject.subscribe(new SubjectObserver<String>("second"));
         behaviorSubject.onNext("3");
         behaviorSubject.onComplete();
     }
 
+    /**
+     * ReplaySubject无论什么时候注册observer，无论何时通过ReplaySubject发射的所有事件，均会发送给新的observer
+     *
+     * @param view
+     */
     public static void replaySubject(View view) {
         ReplaySubject<String> replaySubject = ReplaySubject.create();
         replaySubject.subscribe(new SubjectObserver<>("first"));
         replaySubject.onNext("1");
         replaySubject.onNext("2");
-        replaySubject.subscribe(new SubjectObserver<>("seconde"));
+        replaySubject.subscribe(new SubjectObserver<>("second"));
         replaySubject.onNext("3");
         replaySubject.onComplete();
     }
 
+    /**
+     * 只有当AsyncSubject调用onComplete方法时，才会将AsyncSubject中的最后一个事件传递给observer。如果不调用onComplete方法，则不会给observer发送任何事件
+     *
+     * @param view
+     */
     public static void asyncSubject(View view) {
-        AsyncSubject asyncSubject = AsyncSubject.create();
-        asyncSubject.subscribe(new SubjectObserver<String>("first"));
+        AsyncSubject<String> asyncSubject = AsyncSubject.create();
+        asyncSubject.subscribe(new SubjectObserver<>("first"));
         asyncSubject.onNext("1");
         asyncSubject.onNext("2");
         asyncSubject.onNext("3");
         asyncSubject.onComplete();
-        asyncSubject.subscribe(new SubjectObserver<String>("seconde"));
+        asyncSubject.subscribe(new SubjectObserver<>("second"));
         asyncSubject.onComplete();
     }
 
-    public static void transpondData(View view){
+    public static void transpondData(View view) {
         //组件A
-        Observable<String> observable = Observable.fromArray("123","456","789");
+        Observable<String> observable = Observable.fromArray("123", "456", "789");
         ReplaySubject<String> replaySubject = ReplaySubject.create();
 
         observable.subscribe(replaySubject);
