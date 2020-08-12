@@ -19,9 +19,9 @@ public class Defer {
         i = 10;
 
         Observable<Integer> just = Observable.just(i, i);
-        Observable<Object> defer = Observable.defer(new Callable<ObservableSource<?>>() {
+        Observable<Integer> defer = Observable.defer(new Callable<ObservableSource<Integer>>() {
             @Override
-            public ObservableSource<?> call() throws Exception {
+            public ObservableSource<Integer> call() throws Exception {
                 //缓存新的事件流
                 return Observable.just(i, i);
             }
@@ -32,23 +32,28 @@ public class Defer {
         just.subscribe(new Consumer<Integer>() {
             @Override
             public void accept(Integer integer) throws Exception {
-                System.out.println("onNext=" + integer);
+                System.out.println("just1 onNext=" + integer);
             }
         });
-
         defer.subscribe(new Consumer<Object>() {
             @Override
             public void accept(Object o) throws Exception {
-                System.out.println("onNext=" + (int) o);
+                System.out.println("defer1 onNext=" + (int) o);
             }
         });
 
         i = 20;
 
+        just.subscribe(new Consumer<Integer>() {
+            @Override
+            public void accept(Integer integer) throws Exception {
+                System.out.println("just2 onNext=" + integer);
+            }
+        });
         defer.subscribe(new Consumer<Object>() {
             @Override
             public void accept(Object o) throws Exception {
-                System.out.println("onNext=" + (int) o);
+                System.out.println("defer2 onNext=" + (int) o);
             }
         });
     }
